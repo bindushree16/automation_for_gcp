@@ -1,5 +1,5 @@
 resources:
-  - name: repo_bindu
+  - name: repogcp_bindu
     type: GitRepo
     configuration:
       gitProvider: bindu_github
@@ -19,7 +19,7 @@ pipelines:
           integrations:
             - name: aws_keys  
           inputResources:
-            - name: repo_bindu
+            - name: repogcp_bindu
           runtime:       
             type: image     #<image/host>
             image:
@@ -57,7 +57,7 @@ pipelines:
           inputSteps:
             - name: gcp_machine
           inputResources:
-            - name: repo_bindu   
+            - name: repogcp_bindu   
           runtime:       
             type: image     #<image/host>
             image:
@@ -96,7 +96,7 @@ pipelines:
           inputSteps:
             - name: gcp_installation
           inputResources:
-            - name: repo_bindu
+            - name: repogcp_bindu
           runtime:       
             type: image     #<image/host>
             image:
