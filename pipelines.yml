@@ -36,10 +36,8 @@ pipelines:
             - ls -la
             - PWD=$(pwd)
             - echo PWD=$PWD
-            - replace_envs $PWD/keys.tfvar
-            - terraform apply -auto-approve -var-file="$PWD/keys.tfvar"
-            - terraform output bindu_ip
-            - bindu_ip_address=$(terraform output bindu_ip)
+            - terraform output ip
+            - bindu_ip_address=$(terraform output ip)
             - echo "$bindu_ip_address"
             - add_pipeline_variables bindu_ip_address=$bindu_ip_address
             - add_pipeline_files $PWD/terraform.tfstate jfrog_pipeline
@@ -53,7 +51,7 @@ pipelines:
             env1: value1
             env2: value2
           integrations:
-            - name: bindu_pem 
+            - name: gcp_key 
             - name: ART_keys
             - name: art  
           inputSteps:
@@ -74,19 +72,16 @@ pipelines:
             - echo $PWD
             - replace_envs $PWD/pipeline_installer.sh
             - cat $PWD/pipeline_installer.sh
-            - echo "$int_bindu_pem_key" > bindu.pem
-            - cat $PWD/bindu.pem
             - echo $bindu_ip_address
             - chmod 777 "$PWD"/pipeline_installer.sh
             - chmod 777 "$PWD"/test.sh
-            - sudo chmod 600 "$PWD"/bindu.pem
-            - cp "$PWD"/bindu.pem ~/.ssh/
-            - cat ~/.ssh/bindu.pem
             - which ssh
-            - scp -i ~/.ssh/bindu.pem $PWD/pipeline_installer.sh test.sh centos@$bindu_ip_address:~
-            - ssh -i ~/.ssh/bindu.pem centos@$bindu_ip_address ls
-            - ssh -i ~/.ssh/bindu.pem centos@$bindu_ip_address "sudo ./pipeline_installer.sh"
-            - ssh -i ~/.ssh/bindu.pem centos@$bindu_ip_address "sudo ./test.sh"
+            - echo $PWD
+            - ssh -i ~/.ssh/id_rsa bindu@bindu_ip_address:~
+#             - scp -i ~/.ssh/bindu.pem $PWD/pipeline_installer.sh test.sh centos@$bindu_ip_address:~
+#             - ssh -i ~/.ssh/bindu.pem centos@$bindu_ip_address ls
+#             - ssh -i ~/.ssh/bindu.pem centos@$bindu_ip_address "sudo ./pipeline_installer.sh"
+#             - ssh -i ~/.ssh/bindu.pem centos@$bindu_ip_address "sudo ./test.sh"
             
       - name: Destroy_gcp_machine
         type: Bash
