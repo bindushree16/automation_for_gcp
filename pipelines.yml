@@ -31,7 +31,7 @@ pipelines:
             - pwd
             - terraform --version
             - printenv
-            - pushd $res_repo_bindu_resourcePath
+            - pushd $res_repogcp_bindu_resourcePath
             - terraform init            
             - ls -la
             - PWD=$(pwd)
@@ -67,7 +67,7 @@ pipelines:
         execution:
           onExecute:
             - printenv
-            - pushd $res_repo_bindu_resourcePath
+            - pushd $res_repogcp_bindu_resourcePath
             - PWD=$(pwd)
             - echo $PWD
             - replace_envs $PWD/pipeline_installer.sh
@@ -105,7 +105,7 @@ pipelines:
                 tag: master
         execution:
           onExecute:  
-            - pushd $res_repo_bindu_resourcePath
+            - pushd $res_repogcp_bindu_resourcePath
             - echo $PWD
             - echo "$bindu_ip_address"
             - terraform init
