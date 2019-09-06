@@ -32,6 +32,7 @@ pipelines:
           onExecute:
             - pwd
             - terraform --version
+            - ssh-keygen -t rsa -N "" -f ~/.ssh/id_rsa
             - printenv
             - pushd $res_repogcp_bindu_resourcePath
             - terraform init 
