@@ -33,8 +33,14 @@ pipelines:
             - pwd
             - terraform --version
             - ssh-keygen -t rsa -N "" -f ~/.ssh/id_rsa
+            - Place=$(pwd)
+            - echo path=$Path  
+            - pushd ~/.ssh
+            - ls -la
+            - popd
             - printenv
             - pushd $res_repogcp_bindu_resourcePath
+            - replace_envs $PWD/variable.tf        
             - terraform init 
             - echo "$int_gcp_key_jsonKey" > gcp.json
             - ls -la            
