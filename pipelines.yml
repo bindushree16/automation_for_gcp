@@ -86,6 +86,8 @@ pipelines:
             - chmod 777 "$PWD"/pipeline_installer.sh
             - chmod 777 "$PWD"/test.sh
             - chmod 400 ~/.ssh/id_rsa
+            - cat ~/.ssh/id_rsa
+            - cat $bindu_ip_address
             - which ssh
             - scp -i ~/.ssh/id_rsa $PWD/pipeline_installer.sh test.sh bindu@$bindu_ip_address:~
             - ssh -i ~/.ssh/id_rsa bindu@$bindu_ip_address ls
