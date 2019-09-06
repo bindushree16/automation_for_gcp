@@ -33,11 +33,12 @@ pipelines:
             - printenv
             - pushd $res_repogcp_bindu_resourcePath
             - rm -rf .terraform
-            - terraform init            
-            - ls -la
+            - terraform init 
+            - echo "$int_gcp_key_name" > gcp.json
+            - ls -la            
+            - terraform apply -auto-approve -var-file="$PWD/gcp.json"
             - PWD=$(pwd)
             - echo PWD=$PWD
-            - terraform apply -auto-approve 
             - terraform output ip
             - bindu_ip_address=$(terraform output ip)
             - echo "$bindu_ip_address"
