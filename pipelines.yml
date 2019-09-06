@@ -45,14 +45,12 @@ pipelines:
             - echo "$int_gcp_key_jsonKey" > gcp.json
             - ls -la            
             - terraform apply -auto-approve -var-file="$PWD/gcp.json"
-            - PWD=$(pwd)
-            - echo PWD=$PWD
             - terraform output ip
             - bindu_ip_address=$(terraform output ip)
             - echo "$bindu_ip_address"
             - add_pipeline_variables bindu_ip_address=$bindu_ip_address
             - add_pipeline_files $PWD/terraform.tfstate jfrog_pipeline
-            - popd
+            - popd 
 
       - name: gcp_installation
         type: Bash
