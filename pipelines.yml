@@ -122,7 +122,7 @@ pipelines:
             - echo "$bindu_ip_address"
             - terraform init
             - restore_pipeline_files jfrog_rhel_pipeline $PWD/terraform.tfstate
-            - terraform destroy -auto-approve -var-file="$PWD/keys.tfvar"
+            - terraform destroy -auto-approve 
             - popd
             
             
