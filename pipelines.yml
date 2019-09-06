@@ -81,16 +81,18 @@ pipelines:
             - echo $PWD
             - replace_envs $PWD/pipeline_installer.sh
             - cat $PWD/pipeline_installer.sh
+            - echo "$int_gcp_key_jsonKey" > gcp.json
+            - cat $PWD/gcp.json
             - echo $bindu_ip_address
             - chmod 777 "$PWD"/pipeline_installer.sh
             - chmod 777 "$PWD"/test.sh
+            - cp "$PWD"/gcp.json ~/.ssh/
+            - cat ~/.ssh/gcp.json
             - which ssh
-            - echo $PWD
-            - ssh -i ~/.ssh/id_rsa bindu@bindu_ip_address:~
-#             - scp -i ~/.ssh/bindu.pem $PWD/pipeline_installer.sh test.sh centos@$bindu_ip_address:~
-#             - ssh -i ~/.ssh/bindu.pem centos@$bindu_ip_address ls
-#             - ssh -i ~/.ssh/bindu.pem centos@$bindu_ip_address "sudo ./pipeline_installer.sh"
-#             - ssh -i ~/.ssh/bindu.pem centos@$bindu_ip_address "sudo ./test.sh"
+            - scp -i ~/.ssh/gcp.json $PWD/pipeline_installer.sh test.sh bindu@bindu_ip_address:~
+            - ssh -i ~/.ssh/gcp.json bindu@bindu_ip_address ls
+            - ssh -i ~/.ssh/gcp.json bindu@bindu_ip_address "sudo ./pipeline_installer.sh"
+            - ssh -i ~/.ssh/gcp.json bindu@bindu_ip_address "sudo ./test.sh"
             
       - name: Destroy_gcp_machine
         type: Bash
