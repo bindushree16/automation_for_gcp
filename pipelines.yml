@@ -4,6 +4,8 @@ resources:
     configuration:
       gitProvider: bindu_github
       path: bindushree16/automation_for_gcp 
+      buildOn:
+         commit: false 
       
 pipelines:
   - name: automation_gcp_pipeline
