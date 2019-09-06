@@ -34,7 +34,6 @@ pipelines:
             - terraform --version
             - printenv
             - pushd $res_repogcp_bindu_resourcePath
-            - rm -rf .terraform
             - terraform init 
             - echo "$int_gcp_key_jsonKey" > gcp.json
             - ls -la            
