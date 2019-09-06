@@ -5,7 +5,7 @@ variable "zone_id" {
 default = "us-central1-a"
 }
 variable "image_name" {
-default = "ubuntu-os-cloud/ubuntu-1604-lts"
+default = "centos-cloud/centos-7"
 }
 variable "disk_size" {
 default = 30
