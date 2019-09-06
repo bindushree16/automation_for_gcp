@@ -5,7 +5,7 @@ provider "google" {
 }
 
 resource "google_compute_instance" "default" {
-  name         = "centOS_test"
+  name         = "centOStest"
   machine_type = "${var.instance_type}"
   zone         = "${var.zone_id}"
 
