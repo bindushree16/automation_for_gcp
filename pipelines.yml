@@ -119,8 +119,9 @@ pipelines:
           onExecute:  
             - pushd $res_repogcp_bindu_resourcePath
             - echo $PWD
+            - echo "$int_gcp_key_jsonKey" > gcp.json 
             - echo "$bindu_ip_address"
-            - restore_pipeline_files jfrog ~/.ssh/id_rsa
+            - restore_pipeline_files jfrog ~/.ssh/id_rsa 
             - terraform init
             - restore_pipeline_files jfrog_pipeline $PWD/terraform.tfstate
             - cat terraform.tfstate
