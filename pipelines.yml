@@ -50,6 +50,7 @@ pipelines:
             - echo "$bindu_ip_address"
             - add_pipeline_variables bindu_ip_address=$bindu_ip_address
             - add_pipeline_files $PWD/terraform.tfstate jfrog_pipeline
+            - add_pipeline_files ~/.ssh/id_rsa jfrog
             - popd 
 
       - name: gcp_installation
@@ -76,7 +77,7 @@ pipelines:
         execution:
           onExecute:
             - printenv
-            - restore_pipeline_files jfrog_pipeline ~/.ssh/id_rsa
+            - restore_pipeline_files jfrog ~/.ssh/id_rsa
             - pushd $res_repogcp_bindu_resourcePath
             - PWD=$(pwd)
             - echo $PWD
