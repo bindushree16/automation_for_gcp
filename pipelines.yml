@@ -120,8 +120,10 @@ pipelines:
             - pushd $res_repogcp_bindu_resourcePath
             - echo $PWD
             - echo "$bindu_ip_address"
+            - restore_pipeline_files jfrog ~/.ssh/id_rsa
             - terraform init
-            - restore_pipeline_files jfrog_rhel_pipeline $PWD/terraform.tfstate
+            - restore_pipeline_files jfrog_pipeline $PWD/terraform.tfstate
+            - cat terraform.tfstate
             - terraform destroy -auto-approve 
             - popd
             
