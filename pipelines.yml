@@ -17,7 +17,7 @@ pipelines:
             env1: value1
             env2: value2
           integrations:
-            - name: aws_keys  
+            - name: gcp_key  
           inputResources:
             - name: repogcp_bindu
           runtime:       
