@@ -39,8 +39,7 @@ pipelines:
             - ls -la
             - popd
             - printenv
-            - pushd $res_repogcp_bindu_resourcePath
-            - replace_envs $PWD/variable.tf        
+            - pushd $res_repogcp_bindu_resourcePath        
             - terraform init 
             - echo "$int_gcp_key_jsonKey" > gcp.json
             - ls -la            
